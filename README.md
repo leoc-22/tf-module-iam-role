@@ -1,6 +1,8 @@
 # Terraform Module: IAM Role
 
-This is a Terraform module for creating custom AWS IAM roles.
+This is DAQ's Terraform Module for AWS IAM role management.
+
+This repo provides a template for other Terraform repos to create IAM roles.
 
 ## Install
 
@@ -11,7 +13,11 @@ This is a Terraform module for creating custom AWS IAM roles.
 ## Usage
 
 This module creates an IAM Role and its policy document.
-You need to pass your custom policy document to the module.
+You need to pass your custom policy document or a list of AWS pre-defined policies to the module.
+
+## Example
+
+See [examples](./examples/).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
@@ -35,8 +41,9 @@ No modules.
 | Name | Type |
 |------|------|
 | [aws_iam_policy.custom_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy) | resource |
-| [aws_iam_policy_attachment.custom_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy_attachment) | resource |
+| [aws_iam_policy_attachment.custom_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_policy_attachment) | resource |
 | [aws_iam_role.custom_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.existing_policy_attachment](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.assume_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
 
@@ -45,6 +52,7 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_arns_assume_role"></a> [arns\_assume\_role](#input\_arns\_assume\_role) | List of ARNs of IAM entities that can assume the role | `list(string)` | `[]` | no |
+| <a name="input_existing_iam_policy_arns"></a> [existing\_iam\_policy\_arns](#input\_existing\_iam\_policy\_arns) | List of ARNs of existing IAM policies | `list(string)` | `[]` | no |
 | <a name="input_iam_policy_document"></a> [iam\_policy\_document](#input\_iam\_policy\_document) | Custom IAM policy document | `string` | `""` | no |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Name prefix for IAM role name | `string` | `""` | no |
 | <a name="input_role_description"></a> [role\_description](#input\_role\_description) | An optional IAM role description | `string` | `""` | no |
